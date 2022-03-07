@@ -6,24 +6,9 @@ package com.industriallogic.bigqueryjsonparser;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.CoreMatchers.is;
-
-
 class AppTest {
     @Test void appHasAGreeting() {
         App classUnderTest = new App();
         assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
-       // assertThat
-    }
-
-    @Test
-    public void shouldDoSomething(){
-        // arrange
-
-        // act
-
-        // assert
-        assertThat(3, is(3));
     }
 }
