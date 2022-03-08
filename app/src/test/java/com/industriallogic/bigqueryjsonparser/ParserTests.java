@@ -14,6 +14,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ParserTests {
 
+    private final String json1File = "src/test/java/com/industriallogic/bigqueryjsonparser/json1.json";
+    private final String json2File = "src/test/java/com/industriallogic/bigqueryjsonparser/json2.json";
+    private final String json3File = "src/test/java/com/industriallogic/bigqueryjsonparser/json3.json";
+
     @Test
     public void shouldFlatten1Level() {
         // arrange
@@ -55,11 +59,10 @@ public class ParserTests {
         assertThat(flattened.has("fields"), is(false));
     }
 
-
     @Test
-    public void shouldLoadInJsonFileAndParseFields() throws IOException {
+    public void shouldLoadInJson1FileAndParseFields() throws IOException {
         // arrange
-        Path filename = Path.of("src/test/java/com/industriallogic/bigqueryjsonparser/json1.json");
+        Path filename = Path.of(json1File);
         String fileContent = Files.readString(filename);
 
         // act
@@ -68,6 +71,41 @@ public class ParserTests {
         // assert
         assertThat(flattened.get("approxLogTime").getAsString(), is("1644862497000"));
         assertThat(flattened.get("fieldTypesVersion").getAsString(), is("2.0"));
+        assertThat(flattened.get("id").getAsString(), is("92dbe5e0-faf6-442e-a6a9-4eed557d48a1"));
+        assertThat(flattened.get("forwarder").getAsString(), is("gcp-generator2.c.project-09fef8d782fec714.internal"));
+        assertThat(flattened.has("fields"), is(false));
+    }
+
+    @Test
+    public void shouldLoadInJson2FileAndParseFields() throws IOException {
+        // arrange
+        Path filename = Path.of(json2File);
+        String fileContent = Files.readString(filename);
+
+        // act
+        JsonObject flattened = flatten(fileContent);
+
+        // assert
+        assertThat(flattened.get("approxLogTime").getAsString(), is("1644862497000"));
+        assertThat(flattened.get("fieldTypesVersion").getAsString(), is("2.0"));
+        assertThat(flattened.get("id").getAsString(), is("757b7ee7-16bd-4f62-acff-ddecae390172"));
+        assertThat(flattened.get("forwarder").getAsString(), is("gcp-generator2.c.project-09fef8d782fec714.internal"));
+        assertThat(flattened.has("fields"), is(false));
+    }
+
+    @Test
+    public void shouldLoadInJson3FileAndParseFields() throws IOException {
+        // arrange
+        Path filename = Path.of(json3File);
+        String fileContent = Files.readString(filename);
+
+        // act
+        JsonObject flattened = flatten(fileContent);
+
+        // assert
+        assertThat(flattened.get("approxLogTime").getAsString(), is("1644862497000"));
+        assertThat(flattened.get("fieldTypesVersion").getAsString(), is("2.0"));
+        assertThat(flattened.get("id").getAsString(), is("bd5c39ae-d89e-460b-a659-01e2e62eaba1"));
         assertThat(flattened.get("forwarder").getAsString(), is("gcp-generator2.c.project-09fef8d782fec714.internal"));
         assertThat(flattened.has("fields"), is(false));
     }
