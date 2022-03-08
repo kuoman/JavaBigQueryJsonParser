@@ -8,7 +8,9 @@ import java.util.concurrent.TimeUnit;
 public class Parse {
     public JsonObject parse(String source) {
         JsonObject flatSource = flatten(source);
+
         JsonObject flatCleanSource = removeSpecialCharacters(flatSource);
+
         return parse(flatCleanSource);
     }
 
@@ -35,6 +37,10 @@ public class Parse {
         return result;
     }
 
+    private JsonElement extractValue(JsonObject source, String key) {
+        return source.get(key);
+    }
+
     private JsonElement getNanoSeconds(JsonObject source, String key) {
         Instant exaRscTimestamp = Instant.parse(source.get(key).getAsString());
 
@@ -43,10 +49,6 @@ public class Parse {
         Long rawMicro = TimeUnit.SECONDS.toMicros(epoch) + micro;
 
         return new JsonPrimitive(rawMicro);
-    }
-
-    private JsonElement extractValue(JsonObject source, String key) {
-        return source.get(key);
     }
 
     private JsonElement getMicroseconds(JsonObject source, String keyName) {
