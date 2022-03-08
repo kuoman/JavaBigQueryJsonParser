@@ -1,25 +1,18 @@
 package com.industriallogic.bigqueryjsonparser;
 
 
-import com.google.common.io.Files;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.junit.jupiter.api.Test;
-import org.testng.annotations.Ignore;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Reader;
-import java.net.URI;
-import java.nio.file.Paths;
-import java.util.Iterator;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Set;
 
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class FlattenTests {
 
@@ -62,6 +55,13 @@ public class FlattenTests {
 
         // assert
 
+    }
+
+    @Test
+    public void shouldPrintFile() throws IOException {
+        Path filename = Path.of("src/test/java/com/industriallogic/bigqueryjsonparser/json1.json");
+        String fileContent = Files.readString(filename);
+        System.out.println(fileContent);
     }
 
     private JsonObject flatten(String input) {
