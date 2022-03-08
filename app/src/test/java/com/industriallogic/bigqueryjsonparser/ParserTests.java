@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -229,7 +230,7 @@ public class ParserTests {
         JsonObject result = parse(input);
 
         // assert
-        assertThat(result.get("exa_rsc_timestamp").getAsString(), is("2022-02-14T18:15:04.782Z"));
+        assertThat(result.get("exa_rsc_timestamp").getAsLong(), is(1644862504782000L));
     }
 
     private JsonObject parse(JsonObject source) {
@@ -237,8 +238,8 @@ public class ParserTests {
 
         JsonObject cleanSource = removeSpecialCharacters(source);
 
+        result.add("exa_rsc_timestamp", getNanoSeconds(cleanSource, "exa_rsc_timestamp"));
 
-        result.addProperty("exa_rsc_timestamp", extractStringValue(cleanSource, "exa_rsc_timestamp"));
         result.add("approxLogTime", getMicroseconds(cleanSource, "approxLogTime"));
         result.add("src_ip", extractSubValue(cleanSource, "src_ip"));
         result.add("dest_ip", extractSubValue(cleanSource, "dest_ip"));
@@ -246,8 +247,18 @@ public class ParserTests {
         return result;
     }
 
-    private String extractStringValue(JsonObject source, String key) {
-        return source.get(key).getAsString();
+    private JsonElement getNanoSeconds(JsonObject source, String key) {
+        Instant exaRscTimestamp = Instant.parse(source.get(key).getAsString());
+
+        Long epoch = exaRscTimestamp.getEpochSecond();
+        Long micro = TimeUnit.NANOSECONDS.toMicros(exaRscTimestamp.getNano());
+        Long rawMicro = TimeUnit.SECONDS.toMicros(epoch) + micro;
+
+        return new JsonPrimitive(rawMicro);
+    }
+
+    private JsonElement extractValue(JsonObject source, String key) {
+        return source.get(key);
     }
 
     private JsonElement getMicroseconds(JsonObject source, String keyName) {
