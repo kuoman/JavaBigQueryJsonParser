@@ -1,1 +1,81 @@
-{"approxLogTime":1644862497000,"fieldTypesVersion":"2.0","fields":{"forwarder":"gcp-generator2.c.project-09fef8d782fec714.internal","source":"Check Point NGFW","exa_rsc.hostname":"ecp-dev-site-collector","exa_activity_type":["network-traffic"],"host":"170.232.3.197","msg_type":"raw-checkpoint-firewall-accept","exa-message-size":655,"exa_outcome":["success"],"src_port":15302,"raw_log_time_format":"epoch_sec","event_name":"accept","rule":"Egress Svc- Standard","ecp-tracing.file_offset":0,"direction":"inbound","src_ip":{"fieldType":"Ipv4Field","value":"10.252.250.47"},"dest_ip":{"fieldType":"Ipv4Field","value":"54.183.148.43"},"exa_rsc.timestamp":"2022-02-14T18:15:04.782Z","data_type":"network-connection","port":"37246","raw_log_time":{"fieldType":"TimestampField","value":1644862497000},"exa_rsc.time_off":0,"exa_parsing_duration_ns":97071,"msg_category":"Network","product_name":"VPN-1 & FireWall-1","dest_port":443,"dest_translated_port":0,"event_type":"network-connection-successful","category":"network","time":"1644862497","src_translated_port":12135,"vendor":"Check Point Software","@version":"1","exa_device_type":["network/firewall","network"],"ioc_ip_v4":[{"fieldType":"Ipv4Field","value":"54.183.148.43"},{"fieldType":"Ipv4Field","value":"10.252.250.47"},{"fieldType":"Ipv4Field","value":"172.28.8.251"},{"fieldType":"Ipv4Field","value":"170.232.3.197"}],"policy":"Egress-EDC","action":"accept","protocol":"https","product":"Check Point NGFW","exa_rsc.timezone":"UTC"},"id":"757b7ee7-16bd-4f62-acff-ddecae390172","log":"<14>1 2022-02-14T18:14:57.060Z exabeam psr - - - <13>Jun 01 09:38:02 172.28.8.251 01Jun2017 09:38:02 accept 170.232.3.197 product: VPN-1 & FireWall-1; src: 10.252.250.47; s_port: 15302; dst: 54.183.148.43; service: 443; proto: https; rule: Egress Svc- Standard;NAT_addtnl_rulenum: 1;NAT_rulenum: 140;__policy_id_tag: product=VPN-1 & FireWall-1[db_tag={A8AD5BDD-9AB1-5C4A-9F66-F2F4892E679C};mgmt=atlantis;date=1644862497;policy_name=Egress-EDC];has_accounting: 0;i/f_dir: inbound;i/f_name: eth2;origin_sic_name: CN=WHATisTHIS,O=atlantis..5jxmax;rule_uid: {191F060E-187F-4E7E-8DD1-0FC6CB8C5A83};service_id: https;xlatedport: 0;xlatedst: ;xlatesport: 12135;\r","parsed":true}
+{
+  "approxLogTime":1644862497000,
+  "fieldTypesVersion":"2.0",
+  "fields":{
+    "forwarder":"gcp-generator2.c.project-09fef8d782fec714.internal",
+    "source":"Check Point NGFW",
+    "exa_rsc.hostname":"ecp-dev-site-collector",
+    "exa_activity_type":[
+      "network-traffic"
+    ],
+    "host":"170.232.3.197",
+    "msg_type":"raw-checkpoint-firewall-accept",
+    "exa-message-size":655,
+    "exa_outcome":[
+      "success"
+    ],
+    "src_port":15302,
+    "raw_log_time_format":"epoch_sec",
+    "event_name":"accept",
+    "rule":"Egress Svc- Standard",
+    "ecp-tracing.file_offset":0,
+    "direction":"inbound",
+    "src_ip":{
+      "fieldType":"Ipv4Field",
+      "value":"10.252.250.47"
+    },
+    "dest_ip":{
+      "fieldType":"Ipv4Field",
+      "value":"54.183.148.43"
+    },
+    "exa_rsc.timestamp":"2022-02-14T18:15:04.782Z",
+    "data_type":"network-connection",
+    "port":"37246",
+    "raw_log_time":{
+      "fieldType":"TimestampField",
+      "value":1644862497000
+    },
+    "exa_rsc.time_off":0,
+    "exa_parsing_duration_ns":97071,
+    "msg_category":"Network",
+    "product_name":"VPN-1 & FireWall-1",
+    "dest_port":443,
+    "dest_translated_port":0,
+    "event_type":"network-connection-successful",
+    "category":"network",
+    "time":"1644862497",
+    "src_translated_port":12135,
+    "vendor":"Check Point Software",
+    "@version":"1",
+    "exa_device_type":[
+      "network/firewall",
+      "network"
+    ],
+    "ioc_ip_v4":[
+      {
+        "fieldType":"Ipv4Field",
+        "value":"54.183.148.43"
+      },
+      {
+        "fieldType":"Ipv4Field",
+        "value":"10.252.250.47"
+      },
+      {
+        "fieldType":"Ipv4Field",
+        "value":"172.28.8.251"
+      },
+      {
+        "fieldType":"Ipv4Field",
+        "value":"170.232.3.197"
+      }
+    ],
+    "policy":"Egress-EDC",
+    "action":"accept",
+    "protocol":"https",
+    "product":"Check Point NGFW",
+    "exa_rsc.timezone":"UTC"
+  },
+  "id":"757b7ee7-16bd-4f62-acff-ddecae390172",
+  "log":"<14>1 2022-02-14T18:14:57.060Z exabeam psr - - - <13>Jun 01 09:38:02 172.28.8.251 01Jun2017 09:38:02 accept 170.232.3.197 product: VPN-1 & FireWall-1; src: 10.252.250.47; s_port: 15302; dst: 54.183.148.43; service: 443; proto: https; rule: Egress Svc- Standard;NAT_addtnl_rulenum: 1;NAT_rulenum: 140;__policy_id_tag: product=VPN-1 & FireWall-1[db_tag={A8AD5BDD-9AB1-5C4A-9F66-F2F4892E679C};mgmt=atlantis;date=1644862497;policy_name=Egress-EDC];has_accounting: 0;i/f_dir: inbound;i/f_name: eth2;origin_sic_name: CN=WHATisTHIS,O=atlantis..5jxmax;rule_uid: {191F060E-187F-4E7E-8DD1-0FC6CB8C5A83};service_id: https;xlatedport: 0;xlatedst: ;xlatesport: 12135;\r",
+  "parsed":true
+}

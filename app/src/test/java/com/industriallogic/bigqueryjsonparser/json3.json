@@ -1,1 +1,68 @@
-{"approxLogTime":1644862497000,"fieldTypesVersion":"2.0","fields":{"forwarder":"gcp-generator2.c.project-09fef8d782fec714.internal","subject_sid":"S-1-0-0","source":"DC","key_length":"0","exa_rsc.hostname":"ecp-dev-site-collector","exa_activity_type":["authentication/remote-access","authentication"],"domain":"DOMAIN54","logon_type":"3","msg_type":"raw-4624-7","exa-message-size":2839,"auth_process":"Kerberos","ioc_domain":["host.com"],"raw_log_time_format":"yyyyy-MM-dd'T'HH:mm:ss","event_name":"An account was successfully logged on","ecp-tracing.file_offset":0,"src_ip":{"fieldType":"Ipv4Field","value":"172.20.4.107"},"exa_rsc.timestamp":"2022-02-14T18:15:04.782Z","data_type":"windows-4624","port":"37254","raw_log_time":{"fieldType":"TimestampField","value":1644862497000},"auth_package":"Kerberos","exa_rsc.time_off":0,"exa_parsing_duration_ns":488132,"msg_category":"Windows Authentication","event_type":"computer-logon","user_sid":"HOST86759$","category":"authentication","time":"2022-02-14T18:14:57","logon_id":"0x0","vendor":"Microsoft","@version":"1","exa_device_type":["operating-system"],"ioc_ip_v4":[{"fieldType":"Ipv4Field","value":"1.1.1.1"},{"fieldType":"Ipv4Field","value":"172.20.4.107"}],"user":"HOST86759$","event_code":"4624","product":"Windows","exa_rsc.timezone":"UTC"},"id":"bd5c39ae-d89e-460b-a659-01e2e62eaba1","log":"<14>1 2022-02-14T18:14:57.721Z exabeam psr - - - LOGSTASH[-]: {\"agent\":{\"name\":\"a-host\",\"id\":\"3767\"},\"manager\":{\"name\":\"m-host\"},\"data\":{\"srcip\":\"1.1.1.1\",\"account_domain\":\"NA\",\"data\":\"Microsoft-Windows-Security-Auditing\",\"dstuser\":\"(no user)\",\"system_name\":\"host.com\",\"account_name\":\"a-name$\",\"id\":\"4624\",\"type\":\"Security\",\"logon_type\":\"3\",\"security_id\":\"S-1-0-0\",\"status\":\"AUDIT_SUCCESS\"},\"program_name\":\"WinEvtLog\",\"rule\":{\"firedtimes\":19507,\"mail\":false,\"level\":6,\"description\":\"Windows Event\",\"groups\":[\"windows\"],\"id\":\"200000\"},\"decoder\":{\"name\":\"windows\",\"parent\":\"windows\"},\"type\":\"wazuh-alerts\",\"full_log\":\"2018 Jan 28 18:52:01 WinEvtLog: Security: AUDIT_SUCCESS(4624): Microsoft-Windows-Security-Auditing: (no user): no domain: host.com: An account was successfully logged on.    Subject:   Security ID:  S-1-0-0   Account Name:  -   Account Domain:  -   Logon ID:  0x0    Logon Type:   3    New Logon:   Security ID:  HOST86759$   Account Name:  HOST86759$   Account Domain:  DOMAIN54   Logon ID:  0x76209f9e   Logon GUID:  {8AB061E0-4A35-E4E3-0BF2-F9A52B92FD1B}    Process Information:   Process ID:  0x0   Process Name:  -    Network Information:   Workstation Name:    Source Network Address: 172.20.4.107   Source Port:  30972    Detailed Authentication Information:   Logon Process:  Kerberos   Authentication Package: Kerberos   Transited Services: -   Package Name (NTLM only): -   Key Length:  0    This event is generated when a logon session is created. It is generated on the computer that was accessed.    The subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.    The logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).    The New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.    The network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.    The authentication information fields provide detailed information about this specific logon request.   - Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.   - Transited services indicate which intermediate services have participated in this logon request.   - Package name indicates which sub-protocol was used among the NTLM protocols.   - Key length indicates the length of the generated session key. This will be 0 if no session key was requested.\",\"path\":\"/var/ossec/logs/alerts/alerts.json\",\"@timestamp\":\"2018-01-29T00:01:10.088Z\",\"@version\":\"1\",\"host\":\"pg-aws-manager02\",\"location\":\"WinEvtLog\",\"id\":\"1517184069.284746\",\"timestamp\":\"2018-01-29T00:01:09+0000\"}\r","parsed":true}
+{
+  "approxLogTime":1644862497000,
+  "fieldTypesVersion":"2.0",
+  "fields":{
+    "forwarder":"gcp-generator2.c.project-09fef8d782fec714.internal",
+    "subject_sid":"S-1-0-0",
+    "source":"DC",
+    "key_length":"0",
+    "exa_rsc.hostname":"ecp-dev-site-collector",
+    "exa_activity_type":[
+      "authentication/remote-access",
+      "authentication"
+    ],
+    "domain":"DOMAIN54",
+    "logon_type":"3",
+    "msg_type":"raw-4624-7",
+    "exa-message-size":2839,
+    "auth_process":"Kerberos",
+    "ioc_domain":[
+      "host.com"
+    ],
+    "raw_log_time_format":"yyyyy-MM-dd'T'HH:mm:ss",
+    "event_name":"An account was successfully logged on",
+    "ecp-tracing.file_offset":0,
+    "src_ip":{
+      "fieldType":"Ipv4Field",
+      "value":"172.20.4.107"
+    },
+    "exa_rsc.timestamp":"2022-02-14T18:15:04.782Z",
+    "data_type":"windows-4624",
+    "port":"37254",
+    "raw_log_time":{
+      "fieldType":"TimestampField",
+      "value":1644862497000
+    },
+    "auth_package":"Kerberos",
+    "exa_rsc.time_off":0,
+    "exa_parsing_duration_ns":488132,
+    "msg_category":"Windows Authentication",
+    "event_type":"computer-logon",
+    "user_sid":"HOST86759$",
+    "category":"authentication",
+    "time":"2022-02-14T18:14:57",
+    "logon_id":"0x0",
+    "vendor":"Microsoft",
+    "@version":"1",
+    "exa_device_type":[
+      "operating-system"
+    ],
+    "ioc_ip_v4":[
+      {
+        "fieldType":"Ipv4Field",
+        "value":"1.1.1.1"
+      },
+      {
+        "fieldType":"Ipv4Field",
+        "value":"172.20.4.107"
+      }
+    ],
+    "user":"HOST86759$",
+    "event_code":"4624",
+    "product":"Windows",
+    "exa_rsc.timezone":"UTC"
+  },
+  "id":"bd5c39ae-d89e-460b-a659-01e2e62eaba1",
+  "log":"<14>1 2022-02-14T18:14:57.721Z exabeam psr - - - LOGSTASH[-]: {\"agent\":{\"name\":\"a-host\",\"id\":\"3767\"},\"manager\":{\"name\":\"m-host\"},\"data\":{\"srcip\":\"1.1.1.1\",\"account_domain\":\"NA\",\"data\":\"Microsoft-Windows-Security-Auditing\",\"dstuser\":\"(no user)\",\"system_name\":\"host.com\",\"account_name\":\"a-name$\",\"id\":\"4624\",\"type\":\"Security\",\"logon_type\":\"3\",\"security_id\":\"S-1-0-0\",\"status\":\"AUDIT_SUCCESS\"},\"program_name\":\"WinEvtLog\",\"rule\":{\"firedtimes\":19507,\"mail\":false,\"level\":6,\"description\":\"Windows Event\",\"groups\":[\"windows\"],\"id\":\"200000\"},\"decoder\":{\"name\":\"windows\",\"parent\":\"windows\"},\"type\":\"wazuh-alerts\",\"full_log\":\"2018 Jan 28 18:52:01 WinEvtLog: Security: AUDIT_SUCCESS(4624): Microsoft-Windows-Security-Auditing: (no user): no domain: host.com: An account was successfully logged on.    Subject:   Security ID:  S-1-0-0   Account Name:  -   Account Domain:  -   Logon ID:  0x0    Logon Type:   3    New Logon:   Security ID:  HOST86759$   Account Name:  HOST86759$   Account Domain:  DOMAIN54   Logon ID:  0x76209f9e   Logon GUID:  {8AB061E0-4A35-E4E3-0BF2-F9A52B92FD1B}    Process Information:   Process ID:  0x0   Process Name:  -    Network Information:   Workstation Name:    Source Network Address: 172.20.4.107   Source Port:  30972    Detailed Authentication Information:   Logon Process:  Kerberos   Authentication Package: Kerberos   Transited Services: -   Package Name (NTLM only): -   Key Length:  0    This event is generated when a logon session is created. It is generated on the computer that was accessed.    The subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.    The logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).    The New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.    The network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.    The authentication information fields provide detailed information about this specific logon request.   - Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.   - Transited services indicate which intermediate services have participated in this logon request.   - Package name indicates which sub-protocol was used among the NTLM protocols.   - Key length indicates the length of the generated session key. This will be 0 if no session key was requested.\",\"path\":\"/var/ossec/logs/alerts/alerts.json\",\"@timestamp\":\"2018-01-29T00:01:10.088Z\",\"@version\":\"1\",\"host\":\"pg-aws-manager02\",\"location\":\"WinEvtLog\",\"id\":\"1517184069.284746\",\"timestamp\":\"2018-01-29T00:01:09+0000\"}\r",
+  "parsed":true
+}
