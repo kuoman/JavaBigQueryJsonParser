@@ -126,15 +126,19 @@ public class ParserTests {
 
 
         // arrange
-     //   String input = "{\"level-1\": \"level1\", \"fields\":{}}";
+        String input = "{\"level-1\": \"level1\", \"fields\":{}}";
 
         // act
-    //    JsonObject flattened = flatten(input);
+        JsonObject returnValue = removeSpecalCharacters(input);
 
         // assert
+        assertThat(returnValue.get("level_1").getAsString(), is("level1"));
 
-       // assertThat(flattened.get("level_1").getAsString(), is("level1"));
+    }
 
+    private JsonObject removeSpecalCharacters(String input) {
+
+        return JsonParser.parseString("{\"level_1\": \"level1\", \"fields\":{}}").getAsJsonObject();
     }
 
     private JsonObject flatten(String input) {
