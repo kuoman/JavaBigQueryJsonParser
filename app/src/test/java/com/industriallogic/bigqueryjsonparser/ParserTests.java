@@ -110,11 +110,31 @@ public class ParserTests {
         assertThat(flattened.has("fields"), is(false));
     }
 
+
     @Test
-    public void shouldPrintFile() throws IOException {
-        Path filename = Path.of("src/test/java/com/industriallogic/bigqueryjsonparser/json1.json");
-        String fileContent = Files.readString(filename);
-        System.out.println(fileContent);
+    public void shouldCleanUpSpecialCharacters() {
+        // arrange
+        // flattened json
+
+        // clean up removing special characters
+
+        // iterate over fields to parse
+            // if it's time, format
+            // if it's an array format
+
+            // save key/value in result
+
+
+        // arrange
+     //   String input = "{\"level-1\": \"level1\", \"fields\":{}}";
+
+        // act
+    //    JsonObject flattened = flatten(input);
+
+        // assert
+
+       // assertThat(flattened.get("level_1").getAsString(), is("level1"));
+
     }
 
     private JsonObject flatten(String input) {
@@ -123,12 +143,12 @@ public class ParserTests {
 
         JsonObject fields = result.getAsJsonObject("fields");
 
-        for (String key: fields.keySet()) {
-            result.add(key, fields.get(key));
-        }
+        fields.keySet().forEach(key -> result.add(key, fields.get(key)));
 
         result.remove("fields");
 
         return result;
     }
+
+
 }
