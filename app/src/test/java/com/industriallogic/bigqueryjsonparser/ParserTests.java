@@ -123,7 +123,7 @@ public class ParserTests {
     @Test
     public void shouldCleanUpDashCharacters() {
         // arrange
-        JsonObject input = JsonParser.parseString("{\"level-1\": \"level1\", \"fields\":{}}").getAsJsonObject();
+        JsonObject input = createJsonObject("{\"level-1\": \"level1\", \"fields\":{}}");
 
         // act
         JsonObject result = removeSpecialCharacters(input);
@@ -136,7 +136,7 @@ public class ParserTests {
     @Test
     public void shouldCleanUpAtCharacters() {
         // arrange
-        JsonObject input = JsonParser.parseString("{\"@level1\": \"level1\", \"fields\":{}}").getAsJsonObject();
+        JsonObject input = createJsonObject("{\"@level1\": \"level1\", \"fields\":{}}");
 
         // act
         JsonObject result = removeSpecialCharacters(input);
@@ -149,7 +149,7 @@ public class ParserTests {
     @Test
     public void shouldCleanUpPeriodCharacters() {
         // arrange
-        JsonObject input = JsonParser.parseString("{\"level.1\": \"level1\", \"fields\":{}}").getAsJsonObject();
+        JsonObject input = createJsonObject("{\"level.1\": \"level1\", \"fields\":{}}");
 
         // act
         JsonObject result = removeSpecialCharacters(input);
@@ -162,7 +162,7 @@ public class ParserTests {
     @Test
     public void shouldCleanUpMultipleSpecialCharacters() {
         // arrange
-        JsonObject input = JsonParser.parseString("{\"@level.1-\": \"level1\", \"fields\":{}}").getAsJsonObject();
+        JsonObject input = createJsonObject("{\"@level.1-\": \"level1\", \"fields\":{}}");
 
         // act
         JsonObject result = removeSpecialCharacters(input);
@@ -172,12 +172,14 @@ public class ParserTests {
         assertThat(result.has("@level.1-"), is(false));
     }
 
+    private JsonObject createJsonObject(String json) {
+        return JsonParser.parseString(json).getAsJsonObject();
+    }
+
     private JsonObject removeSpecialCharacters(JsonObject input) {
         JsonObject result = new JsonObject();
 
-        for (String key: input.keySet()) {
-            result.add(removeSpecialCharactersFrom(key), input.get(key));
-        }
+        input.keySet().forEach(key -> result.add(removeSpecialCharactersFrom(key), input.get(key)));
 
         return result;
     }
