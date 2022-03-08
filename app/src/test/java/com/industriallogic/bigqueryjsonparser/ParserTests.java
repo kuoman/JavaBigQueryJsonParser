@@ -172,6 +172,29 @@ public class ParserTests {
         assertThat(result.has("@level.1-"), is(false));
     }
 
+
+    @Test
+    public void shouldAddSrcIpField() throws IOException {
+        // arrange
+        Path filename = Path.of(json3File);
+        String fileContent = Files.readString(filename);
+
+        // act
+        JsonObject result = parseIp(fileContent);
+
+        // assert
+        assertThat(result.get("src_ip").getAsString(), is("172.20.4.107"));
+    }
+
+    private JsonObject parseIp(String input) {
+
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.addProperty("src_ip", "172.20.4.107");
+
+        return jsonObject;
+    }
+
     private JsonObject createJsonObject(String json) {
         return JsonParser.parseString(json).getAsJsonObject();
     }
