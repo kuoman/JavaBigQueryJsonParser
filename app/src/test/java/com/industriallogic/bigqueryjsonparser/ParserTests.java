@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -213,11 +214,25 @@ public class ParserTests {
         JsonObject result = parseLogTime(input);
 
         // assert
-        assertThat(result.get("approxLogTime").getAsString(), is(1644862497000L));
+        assertThat(result.get("approxLogTime").getAsLong(), is(1644862497000000L));
     }
 
     private JsonObject parseLogTime(JsonObject input) {
-        return null;
+        JsonObject result = new JsonObject();
+
+
+        JsonElement approxLogTime = input.get("approxLogTime");
+
+        Long rawMilli = approxLogTime.getAsLong();
+        Long rawMicro = TimeUnit.MILLISECONDS.toMicros(rawMilli);
+
+        result.addProperty("approxLogTime", rawMicro);
+
+     //   result.addProperty("approxLogTime", 1644862497000L);
+
+       ///
+
+        return result;
     }
 
     private JsonObject parseIp(JsonObject input) {
