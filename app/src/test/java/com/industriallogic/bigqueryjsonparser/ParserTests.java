@@ -212,37 +212,26 @@ public class ParserTests {
         JsonObject input = flatten(fileContent);
 
         // act
-        JsonObject result = parseLogTime(input);
+        JsonObject result = parseIp(input);
 
         // assert
         assertThat(result.get("approxLogTime").getAsLong(), is(1644862497000000L));
     }
 
-    private JsonObject parseLogTime(JsonObject input) {
+    private JsonObject parseIp(JsonObject source) {
         JsonObject result = new JsonObject();
 
-        JsonElement approxLogTime = input.get("approxLogTime");
-
-        JsonElement jsonElement = getMicroseconds(approxLogTime);
-
-        result.add("approxLogTime", jsonElement);
+        result.add("approxLogTime", getMicroseconds(source, "approxLogTime"));
+        result.add("src_ip", extractSubValue(source, "src_ip"));
+        result.add("dest_ip", extractSubValue(source, "dest_ip"));
 
         return result;
     }
 
-    private JsonElement getMicroseconds(JsonElement approxLogTime) {
-        Long rawMilli = approxLogTime.getAsLong();
+    private JsonElement getMicroseconds(JsonObject source, String keyName) {
+        Long rawMilli = source.get(keyName).getAsLong();
         Long rawMicro = TimeUnit.MILLISECONDS.toMicros(rawMilli);
         return new JsonPrimitive(rawMicro);
-    }
-
-    private JsonObject parseIp(JsonObject input) {
-        JsonObject result = new JsonObject();
-
-        result.add("src_ip", extractSubValue(input, "src_ip"));
-        result.add("dest_ip", extractSubValue(input, "dest_ip"));
-
-        return result;
     }
 
     private JsonElement extractSubValue(JsonObject source, String keyName) {
