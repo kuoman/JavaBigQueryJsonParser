@@ -184,7 +184,7 @@ public class ParserTests {
         JsonObject input = flatten(fileContent);
 
         // act
-        JsonObject result = parseIp(input);
+        JsonObject result = parse(input);
 
         // assert
         assertThat(result.get("src_ip").getAsString(), is("162.3.63.50"));
@@ -198,7 +198,7 @@ public class ParserTests {
         JsonObject input = flatten(fileContent);
 
         // act
-        JsonObject result = parseIp(input);
+        JsonObject result = parse(input);
 
         // assert
         assertThat(result.get("dest_ip").getAsString(), is("10.66.251.6"));
@@ -212,20 +212,42 @@ public class ParserTests {
         JsonObject input = flatten(fileContent);
 
         // act
-        JsonObject result = parseIp(input);
+        JsonObject result = parse(input);
 
         // assert
         assertThat(result.get("approxLogTime").getAsLong(), is(1644862497000000L));
     }
+    
+    @Test
+    public void shouldGetExabeamTimestamp() throws IOException {
+        // arrange
+        Path filename = Path.of(json1File);
+        String fileContent = Files.readString(filename);
+        JsonObject input = flatten(fileContent);
 
-    private JsonObject parseIp(JsonObject source) {
+        // act
+        JsonObject result = parse(input);
+
+        // assert
+        assertThat(result.get("exa_rsc_timestamp").getAsString(), is("2022-02-14T18:15:04.782Z"));
+    }
+
+    private JsonObject parse(JsonObject source) {
         JsonObject result = new JsonObject();
 
-        result.add("approxLogTime", getMicroseconds(source, "approxLogTime"));
-        result.add("src_ip", extractSubValue(source, "src_ip"));
-        result.add("dest_ip", extractSubValue(source, "dest_ip"));
+        JsonObject cleanSource = removeSpecialCharacters(source);
+
+
+        result.addProperty("exa_rsc_timestamp", extractStringValue(cleanSource, "exa_rsc_timestamp"));
+        result.add("approxLogTime", getMicroseconds(cleanSource, "approxLogTime"));
+        result.add("src_ip", extractSubValue(cleanSource, "src_ip"));
+        result.add("dest_ip", extractSubValue(cleanSource, "dest_ip"));
 
         return result;
+    }
+
+    private String extractStringValue(JsonObject source, String key) {
+        return source.get(key).getAsString();
     }
 
     private JsonElement getMicroseconds(JsonObject source, String keyName) {
