@@ -7,8 +7,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Parse {
     public JsonObject parse(String source) {
-        JsonObject flattenedSource = flatten(source);
-        JsonObject flatCleanSource = removeSpecialCharacters(flattenedSource);
+        JsonObject flatSource = flatten(source);
+        JsonObject flatCleanSource = removeSpecialCharacters(flatSource);
         return parse(flatCleanSource);
     }
 
@@ -16,8 +16,11 @@ public class Parse {
         JsonObject result = new JsonObject();
 
         result.add("exa_rsc_timestamp", getNanoSeconds(source, "exa_rsc_timestamp"));
+
         result.add("approxLogTime", getMicroseconds(source, "approxLogTime"));
+
         result.add("ioc_ip_v4", getValuesFromArray(source, "ioc_ip_v4"));
+
         result.add("src_ip", extractSubValue(source, "src_ip"));
         result.add("dest_ip", extractSubValue(source, "dest_ip"));
 

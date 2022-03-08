@@ -163,7 +163,6 @@ public class ParserTests {
         assertThat(result.has("@level.1-"), is(false));
     }
 
-
     @Test
     public void shouldAddSrcIpField() throws IOException {
         // arrange
@@ -193,7 +192,7 @@ public class ParserTests {
     @Test
     public void shouldGetApproxLogTime() throws IOException {
         // arrange
-        Path filename = Path.of(json1File);
+        Path filename = Path.of(json2File);
         String fileContent = Files.readString(filename);
 
         // act
