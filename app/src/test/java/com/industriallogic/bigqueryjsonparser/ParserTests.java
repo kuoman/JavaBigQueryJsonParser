@@ -1,6 +1,7 @@
 package com.industriallogic.bigqueryjsonparser;
 
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.junit.jupiter.api.Test;
@@ -176,7 +177,7 @@ public class ParserTests {
     @Test
     public void shouldAddSrcIpField() throws IOException {
         // arrange
-        Path filename = Path.of(json3File);
+        Path filename = Path.of(json1File);
         String fileContent = Files.readString(filename);
         JsonObject input = flatten(fileContent);
 
@@ -184,7 +185,7 @@ public class ParserTests {
         JsonObject result = parseIp(input);
 
         // assert
-        assertThat(result.get("src_ip").getAsString(), is("172.20.4.107"));
+        assertThat(result.get("src_ip").getAsString(), is("162.3.63.50"));
     }
 
     @Test
@@ -202,15 +203,18 @@ public class ParserTests {
     }
 
     private JsonObject parseIp(JsonObject input) {
-        JsonObject jsonObject = new JsonObject();
+        JsonObject result = new JsonObject();
 
-        JsonObject srcIpElement = input.get("src_ip").getAsJsonObject();
-        jsonObject.add("src_ip", srcIpElement.get("value"));
+        result.add("src_ip", extractSubValue(input, "src_ip"));
 
-        JsonObject destIpElement = input.get("dest_ip").getAsJsonObject();
-        jsonObject.add("dest_ip", destIpElement.get("value"));
+        result.add("dest_ip", extractSubValue(input, "dest_ip"));
 
-        return jsonObject;
+
+        return result;
+    }
+
+    private JsonElement extractSubValue(JsonObject source, String keyName) {
+        return source.get(keyName).getAsJsonObject().get("value");
     }
 
     private JsonObject createJsonObject(String json) {
