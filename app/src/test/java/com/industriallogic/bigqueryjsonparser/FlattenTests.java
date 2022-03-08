@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -86,10 +85,7 @@ public class FlattenTests {
 
         JsonObject fields = result.getAsJsonObject("fields");
 
-
-        Set<String> strings = fields.keySet();
-
-        for (String key: strings) {
+        for (String key: fields.keySet()) {
             result.add(key, fields.get(key));
         }
 
