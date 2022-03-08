@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class FlattenTests {
+public class ParserTests {
 
     @Test
     public void shouldFlatten1Level() {
