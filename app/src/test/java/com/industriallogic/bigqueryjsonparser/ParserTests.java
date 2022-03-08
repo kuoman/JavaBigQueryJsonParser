@@ -110,37 +110,63 @@ public class ParserTests {
         assertThat(flattened.has("fields"), is(false));
     }
 
+    // flattened json
+
+    // clean up removing special characters
+
+    // iterate over fields to parse
+        // if it's time, format
+        // if it's an array format
+
+    // save key/value in result
 
     @Test
-    public void shouldCleanUpSpecialCharacters() {
-        // arrange
-        // flattened json
-
-        // clean up removing special characters
-
-        // iterate over fields to parse
-            // if it's time, format
-            // if it's an array format
-
-            // save key/value in result
-
-
+    public void shouldCleanUpDashCharacters() {
         // arrange
         JsonObject input = JsonParser.parseString("{\"level-1\": \"level1\", \"fields\":{}}").getAsJsonObject();
 
         // act
-        JsonObject returnValue = removeSpecialCharacters(input);
+        JsonObject result = removeSpecialCharacters(input);
 
         // assert
-        assertThat(returnValue.get("level_1").getAsString(), is("level1"));
+        assertThat(result.get("level_1").getAsString(), is("level1"));
+        assertThat(result.has("level-1"), is(false));
+    }
 
+    @Test
+    public void shouldCleanUpAtCharacters() {
+        // arrange
+        JsonObject input = JsonParser.parseString("{\"@level1\": \"level1\", \"fields\":{}}").getAsJsonObject();
+
+        // act
+        JsonObject result = removeSpecialCharacters(input);
+
+        // assert
+        assertThat(result.get("level1").getAsString(), is("level1"));
+        assertThat(result.has("@level1"), is(false));
+    }
+
+    @Test
+    public void shouldCleanUpPeriodCharacters() {
+        // arrange
+        JsonObject input = JsonParser.parseString("{\"level.1\": \"level1\", \"fields\":{}}").getAsJsonObject();
+
+        // act
+        JsonObject result = removeSpecialCharacters(input);
+
+        // assert
+        assertThat(result.get("level_1").getAsString(), is("level1"));
+        assertThat(result.has("level.1"), is(false));
     }
 
     private JsonObject removeSpecialCharacters(JsonObject input) {
         JsonObject result = new JsonObject();
 
         for (String key: input.keySet()) {
-            String newKey = key.replaceAll("-", "_");
+            String newKey = key
+                    .replaceAll("\\.", "_")
+                    .replaceAll("-", "_")
+                    .replaceAll("@", "");
             result.add(newKey, input.get(key));
         }
 
