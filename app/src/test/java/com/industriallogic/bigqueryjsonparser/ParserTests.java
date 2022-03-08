@@ -206,9 +206,7 @@ public class ParserTests {
         JsonObject result = new JsonObject();
 
         result.add("src_ip", extractSubValue(input, "src_ip"));
-
         result.add("dest_ip", extractSubValue(input, "dest_ip"));
-
 
         return result;
     }
