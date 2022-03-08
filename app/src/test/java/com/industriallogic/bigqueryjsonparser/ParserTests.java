@@ -4,6 +4,7 @@ package com.industriallogic.bigqueryjsonparser;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -220,19 +221,19 @@ public class ParserTests {
     private JsonObject parseLogTime(JsonObject input) {
         JsonObject result = new JsonObject();
 
-
         JsonElement approxLogTime = input.get("approxLogTime");
 
-        Long rawMilli = approxLogTime.getAsLong();
-        Long rawMicro = TimeUnit.MILLISECONDS.toMicros(rawMilli);
+        JsonElement jsonElement = getMicroseconds(approxLogTime);
 
-        result.addProperty("approxLogTime", rawMicro);
-
-     //   result.addProperty("approxLogTime", 1644862497000L);
-
-       ///
+        result.add("approxLogTime", jsonElement);
 
         return result;
+    }
+
+    private JsonElement getMicroseconds(JsonElement approxLogTime) {
+        Long rawMilli = approxLogTime.getAsLong();
+        Long rawMicro = TimeUnit.MILLISECONDS.toMicros(rawMilli);
+        return new JsonPrimitive(rawMicro);
     }
 
     private JsonObject parseIp(JsonObject input) {
