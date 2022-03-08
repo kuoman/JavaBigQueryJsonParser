@@ -1,17 +1,13 @@
 package com.industriallogic.bigqueryjsonparser;
 
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.Instant;
-import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -22,16 +18,17 @@ public class ParserTests {
     private final String json2File = "src/test/java/com/industriallogic/bigqueryjsonparser/json2.json";
     private final String json3File = "src/test/java/com/industriallogic/bigqueryjsonparser/json3.json";
 
+    private final Parse parse = new Parse();
+
     @Test
     public void shouldFlatten1Level() {
         // arrange
         String input = "{\"level 1\": \"level1\", \"fields\":{}}";
 
         // act
-        JsonObject flattened = flatten(input);
+        JsonObject flattened = parse.flatten(input);
 
         // assert
-
         assertThat(flattened.get("level 1").getAsString(), is("level1"));
     }
 
@@ -41,7 +38,7 @@ public class ParserTests {
         String input = "{ \"level 1\": \"level1\", \"fields\": {\"level 2\": \"level2bottom\"}}";
 
         // act
-        JsonObject flattened = flatten(input);
+        JsonObject flattened = parse.flatten(input);
 
         // assert
         assertThat(flattened.get("level 1").getAsString(), is("level1"));
@@ -55,7 +52,7 @@ public class ParserTests {
         String input = "{ \"level 1\": \"level1\", \"fields\": {\"level 2\": \"level2bottom\"}}";
 
         // act
-        JsonObject flattened = flatten(input);
+        JsonObject flattened = parse.flatten(input);
 
         // assert
         assertThat(flattened.get("level 1").getAsString(), is("level1"));
@@ -70,7 +67,7 @@ public class ParserTests {
         String fileContent = Files.readString(filename);
 
         // act
-        JsonObject flattened = flatten(fileContent);
+        JsonObject flattened = parse.flatten(fileContent);
 
         // assert
         assertThat(flattened.get("approxLogTime").getAsString(), is("1644862497000"));
@@ -87,7 +84,7 @@ public class ParserTests {
         String fileContent = Files.readString(filename);
 
         // act
-        JsonObject flattened = flatten(fileContent);
+        JsonObject flattened = parse.flatten(fileContent);
 
         // assert
         assertThat(flattened.get("approxLogTime").getAsString(), is("1644862497000"));
@@ -104,7 +101,7 @@ public class ParserTests {
         String fileContent = Files.readString(filename);
 
         // act
-        JsonObject flattened = flatten(fileContent);
+        JsonObject flattened = parse.flatten(fileContent);
 
         // assert
         assertThat(flattened.get("approxLogTime").getAsString(), is("1644862497000"));
@@ -114,23 +111,13 @@ public class ParserTests {
         assertThat(flattened.has("fields"), is(false));
     }
 
-    // flattened json
-
-    // clean up removing special characters
-
-    // iterate over fields to parse
-        // if it's time, format
-        // if it's an array format
-
-    // save key/value in result
-
     @Test
     public void shouldCleanUpDashCharacters() {
         // arrange
         JsonObject input = createJsonObject("{\"level-1\": \"level1\", \"fields\":{}}");
 
         // act
-        JsonObject result = removeSpecialCharacters(input);
+        JsonObject result = parse.removeSpecialCharacters(input);
 
         // assert
         assertThat(result.get("level_1").getAsString(), is("level1"));
@@ -143,7 +130,7 @@ public class ParserTests {
         JsonObject input = createJsonObject("{\"@level1\": \"level1\", \"fields\":{}}");
 
         // act
-        JsonObject result = removeSpecialCharacters(input);
+        JsonObject result = parse.removeSpecialCharacters(input);
 
         // assert
         assertThat(result.get("level1").getAsString(), is("level1"));
@@ -156,7 +143,7 @@ public class ParserTests {
         JsonObject input = createJsonObject("{\"level.1\": \"level1\", \"fields\":{}}");
 
         // act
-        JsonObject result = removeSpecialCharacters(input);
+        JsonObject result = parse.removeSpecialCharacters(input);
 
         // assert
         assertThat(result.get("level_1").getAsString(), is("level1"));
@@ -169,7 +156,7 @@ public class ParserTests {
         JsonObject input = createJsonObject("{\"@level.1-\": \"level1\", \"fields\":{}}");
 
         // act
-        JsonObject result = removeSpecialCharacters(input);
+        JsonObject result = parse.removeSpecialCharacters(input);
 
         // assert
         assertThat(result.get("level_1_").getAsString(), is("level1"));
@@ -182,10 +169,9 @@ public class ParserTests {
         // arrange
         Path filename = Path.of(json1File);
         String fileContent = Files.readString(filename);
-        JsonObject input = flatten(fileContent);
 
         // act
-        JsonObject result = parse(input);
+        JsonObject result = parse.parse(fileContent);
 
         // assert
         assertThat(result.get("src_ip").getAsString(), is("162.3.63.50"));
@@ -196,10 +182,9 @@ public class ParserTests {
         // arrange
         Path filename = Path.of(json1File);
         String fileContent = Files.readString(filename);
-        JsonObject input = flatten(fileContent);
 
         // act
-        JsonObject result = parse(input);
+        JsonObject result = parse.parse(fileContent);
 
         // assert
         assertThat(result.get("dest_ip").getAsString(), is("10.66.251.6"));
@@ -210,10 +195,9 @@ public class ParserTests {
         // arrange
         Path filename = Path.of(json1File);
         String fileContent = Files.readString(filename);
-        JsonObject input = flatten(fileContent);
 
         // act
-        JsonObject result = parse(input);
+        JsonObject result = parse.parse(fileContent);
 
         // assert
         assertThat(result.get("approxLogTime").getAsLong(), is(1644862497000000L));
@@ -224,83 +208,31 @@ public class ParserTests {
         // arrange
         Path filename = Path.of(json1File);
         String fileContent = Files.readString(filename);
-        JsonObject input = flatten(fileContent);
 
         // act
-        JsonObject result = parse(input);
+        JsonObject result = parse.parse(fileContent);
 
         // assert
         assertThat(result.get("exa_rsc_timestamp").getAsLong(), is(1644862504782000L));
     }
 
-    private JsonObject parse(JsonObject source) {
-        JsonObject result = new JsonObject();
+    @Test
+    public void shouldGetIpV4Array() throws IOException {
+        // arrange
+        Path filename = Path.of(json1File);
+        String fileContent = Files.readString(filename);
 
-        JsonObject cleanSource = removeSpecialCharacters(source);
+        // act
+        JsonObject result = parse.parse(fileContent);
 
-        result.add("exa_rsc_timestamp", getNanoSeconds(cleanSource, "exa_rsc_timestamp"));
-
-        result.add("approxLogTime", getMicroseconds(cleanSource, "approxLogTime"));
-        result.add("src_ip", extractSubValue(cleanSource, "src_ip"));
-        result.add("dest_ip", extractSubValue(cleanSource, "dest_ip"));
-
-        return result;
-    }
-
-    private JsonElement getNanoSeconds(JsonObject source, String key) {
-        Instant exaRscTimestamp = Instant.parse(source.get(key).getAsString());
-
-        Long epoch = exaRscTimestamp.getEpochSecond();
-        Long micro = TimeUnit.NANOSECONDS.toMicros(exaRscTimestamp.getNano());
-        Long rawMicro = TimeUnit.SECONDS.toMicros(epoch) + micro;
-
-        return new JsonPrimitive(rawMicro);
-    }
-
-    private JsonElement extractValue(JsonObject source, String key) {
-        return source.get(key);
-    }
-
-    private JsonElement getMicroseconds(JsonObject source, String keyName) {
-        Long rawMilli = source.get(keyName).getAsLong();
-        Long rawMicro = TimeUnit.MILLISECONDS.toMicros(rawMilli);
-        return new JsonPrimitive(rawMicro);
-    }
-
-    private JsonElement extractSubValue(JsonObject source, String keyName) {
-        return source.get(keyName).getAsJsonObject().get("value");
+        // assert
+        assertThat(result.get("ioc_ip_v4").getAsJsonArray().get(0).getAsString(), is("162.3.63.50"));
+        assertThat(result.get("ioc_ip_v4").getAsJsonArray().get(1).getAsString(), is("10.66.251.6"));
+        assertThat(result.get("ioc_ip_v4").getAsJsonArray().get(2).getAsString(), is("172.28.8.251"));
+        assertThat(result.get("ioc_ip_v4").getAsJsonArray().get(3).getAsString(), is("170.232.3.56"));
     }
 
     private JsonObject createJsonObject(String json) {
         return JsonParser.parseString(json).getAsJsonObject();
     }
-
-    private JsonObject removeSpecialCharacters(JsonObject input) {
-        JsonObject result = new JsonObject();
-
-        input.keySet().forEach(key -> result.add(removeSpecialCharactersFrom(key), input.get(key)));
-
-        return result;
-    }
-
-    private String removeSpecialCharactersFrom(String key) {
-        return key
-                .replaceAll("\\.", "_")
-                .replaceAll("-", "_")
-                .replaceAll("@", "");
-    }
-
-    private JsonObject flatten(String input) {
-        JsonObject result = JsonParser.parseString(input).getAsJsonObject();
-
-        JsonObject fields = result.getAsJsonObject("fields");
-
-        fields.keySet().forEach(key -> result.add(key, fields.get(key)));
-
-        result.remove("fields");
-
-        return result;
-    }
-
-
 }
