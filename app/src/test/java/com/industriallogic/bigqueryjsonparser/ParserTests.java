@@ -159,22 +159,37 @@ public class ParserTests {
         assertThat(result.has("level.1"), is(false));
     }
 
+    @Test
+    public void shouldCleanUpMultipleSpecialCharacters() {
+        // arrange
+        JsonObject input = JsonParser.parseString("{\"@level.1-\": \"level1\", \"fields\":{}}").getAsJsonObject();
+
+        // act
+        JsonObject result = removeSpecialCharacters(input);
+
+        // assert
+        assertThat(result.get("level_1_").getAsString(), is("level1"));
+        assertThat(result.has("@level.1-"), is(false));
+    }
+
     private JsonObject removeSpecialCharacters(JsonObject input) {
         JsonObject result = new JsonObject();
 
         for (String key: input.keySet()) {
-            String newKey = key
-                    .replaceAll("\\.", "_")
-                    .replaceAll("-", "_")
-                    .replaceAll("@", "");
-            result.add(newKey, input.get(key));
+            result.add(removeSpecialCharactersFrom(key), input.get(key));
         }
 
         return result;
     }
 
-    private JsonObject flatten(String input) {
+    private String removeSpecialCharactersFrom(String key) {
+        return key
+                .replaceAll("\\.", "_")
+                .replaceAll("-", "_")
+                .replaceAll("@", "");
+    }
 
+    private JsonObject flatten(String input) {
         JsonObject result = JsonParser.parseString(input).getAsJsonObject();
 
         JsonObject fields = result.getAsJsonObject("fields");
