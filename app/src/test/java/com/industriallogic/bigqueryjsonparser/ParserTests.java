@@ -202,6 +202,24 @@ public class ParserTests {
         assertThat(result.get("dest_ip").getAsString(), is("10.66.251.6"));
     }
 
+    @Test
+    public void shouldGetApproxLogTime() throws IOException {
+        // arrange
+        Path filename = Path.of(json1File);
+        String fileContent = Files.readString(filename);
+        JsonObject input = flatten(fileContent);
+
+        // act
+        JsonObject result = parseLogTime(input);
+
+        // assert
+        assertThat(result.get("approxLogTime").getAsString(), is(1644862497000L));
+    }
+
+    private JsonObject parseLogTime(JsonObject input) {
+        return null;
+    }
+
     private JsonObject parseIp(JsonObject input) {
         JsonObject result = new JsonObject();
 
