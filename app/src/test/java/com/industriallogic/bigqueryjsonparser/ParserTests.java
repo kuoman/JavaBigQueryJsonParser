@@ -178,19 +178,37 @@ public class ParserTests {
         // arrange
         Path filename = Path.of(json3File);
         String fileContent = Files.readString(filename);
+        JsonObject input = flatten(fileContent);
 
         // act
-        JsonObject result = parseIp(fileContent);
+        JsonObject result = parseIp(input);
 
         // assert
         assertThat(result.get("src_ip").getAsString(), is("172.20.4.107"));
     }
 
-    private JsonObject parseIp(String input) {
+    @Test
+    public void shouldAddDestIpField() throws IOException {
+        // arrange
+        Path filename = Path.of(json1File);
+        String fileContent = Files.readString(filename);
+        JsonObject input = flatten(fileContent);
 
+        // act
+        JsonObject result = parseIp(input);
+
+        // assert
+        assertThat(result.get("dest_ip").getAsString(), is("10.66.251.6"));
+    }
+
+    private JsonObject parseIp(JsonObject input) {
         JsonObject jsonObject = new JsonObject();
 
-        jsonObject.addProperty("src_ip", "172.20.4.107");
+        JsonObject srcIpElement = input.get("src_ip").getAsJsonObject();
+        jsonObject.add("src_ip", srcIpElement.get("value"));
+
+        JsonObject destIpElement = input.get("dest_ip").getAsJsonObject();
+        jsonObject.add("dest_ip", destIpElement.get("value"));
 
         return jsonObject;
     }
