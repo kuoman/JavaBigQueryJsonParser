@@ -5,7 +5,7 @@ import com.industriallogic.bigqueryjsonparser.Parse;
 
 public class IdStrategy {
 
-    private final String fieldName = "id";
+    private final String keyname = "id";
     private Parse parse;
 
     public IdStrategy(Parse parse) {
@@ -15,8 +15,8 @@ public class IdStrategy {
 
     public JsonObject parse(JsonObject result, JsonObject source) {
 
-        if (source.has(fieldName)) {
-            result.add(fieldName, parse.extractValue(source, fieldName));
+        if (source.has(keyname)) {
+            result.add(keyname, parse.extractValue(source, keyname));
         }
 
         return result;
