@@ -10,7 +10,7 @@ public class IocIpV4Strategy {
         this.parse = parse;
     }
 
-    JsonObject parse(JsonObject result, JsonObject source) {
+    public JsonObject parse(JsonObject result, JsonObject source) {
 
         if (source.has("ioc_ip_v4")) {
             result.add("ioc_ip_v4", parse.getValuesFromArray(source, "ioc_ip_v4"));

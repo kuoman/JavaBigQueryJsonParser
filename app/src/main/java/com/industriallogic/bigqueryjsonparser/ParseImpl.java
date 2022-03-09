@@ -3,11 +3,13 @@ package com.industriallogic.bigqueryjsonparser;
 import com.google.gson.*;
 import com.industriallogic.bigqueryjsonparser.strategies.ApproxLogTimeStrategy;
 import com.industriallogic.bigqueryjsonparser.strategies.ExaRscTimestampStrategy;
+import com.industriallogic.bigqueryjsonparser.strategies.IocIpV4Strategy;
 
 import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 
 public class ParseImpl implements Parse {
+
     @Override
     public JsonObject parse(String source) {
         JsonObject flatSource = flatten(source);
@@ -25,7 +27,7 @@ public class ParseImpl implements Parse {
         new ApproxLogTimeStrategy(this).parse(result, source);
 
         // unknown
-        result.add("ioc_ip_v4", getValuesFromArray(source, "ioc_ip_v4"));
+        new IocIpV4Strategy(this).parse(result, source);
 
         // optional
         if (source.has("src_ip")){
