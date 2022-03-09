@@ -5,13 +5,17 @@ import com.industriallogic.bigqueryjsonparser.Parse;
 
 public class IdStrategy {
 
-    private String fieldName = "id";
+    private final String fieldName = "id";
+    private Parse parse;
+
+    public IdStrategy(Parse parse) {
+
+        this.parse = parse;
+    }
 
     public JsonObject parse(JsonObject result, JsonObject source) {
 
         if (source.has(fieldName)) {
-            Parse parse = new Parse();
-
             result.add(fieldName, parse.extractValue(source, fieldName));
         }
 

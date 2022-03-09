@@ -2,6 +2,7 @@ package com.industriallogic.bigqueryjsonparser.strategies;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import com.industriallogic.bigqueryjsonparser.Parse;
 import com.industriallogic.bigqueryjsonparser.parseStrategies.IdStrategy;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ public class IdStrategyTests {
         input.add("id", new JsonPrimitive("12345"));
         JsonObject result = new JsonObject();
 
-        IdStrategy idStrategy = new IdStrategy();
+        IdStrategy idStrategy = new IdStrategy(new Parse());
 
         // act
         result = idStrategy.parse(result, input);
@@ -35,7 +36,7 @@ public class IdStrategyTests {
         input.add("idz", new JsonPrimitive("12345"));
         JsonObject result = new JsonObject();
 
-        IdStrategy idStrategy = new IdStrategy();
+        IdStrategy idStrategy = new IdStrategy(new Parse());
 
         // act
         result = idStrategy.parse(result, input);
