@@ -1,10 +1,7 @@
 package com.industriallogic.bigqueryjsonparser;
 
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -232,7 +229,7 @@ public class ParserTests {
         assertThat(result.get("ioc_ip_v4").getAsJsonArray().get(2).getAsString(), is("172.28.8.251"));
         assertThat(result.get("ioc_ip_v4").getAsJsonArray().get(3).getAsString(), is("170.232.3.56"));
     }
-    
+
     @Test
     public void shouldGetValuesFromArray() {
         // arrange.
@@ -258,6 +255,19 @@ public class ParserTests {
         assertThat(result.getAsJsonArray().size(), is(2));
         assertThat(result.getAsJsonArray().get(0).getAsString(), is("value1"));
         assertThat(result.getAsJsonArray().get(1).getAsString(), is("value2"));
+    }
+
+    @Test
+    public void shouldGetValueFromKey(){
+        // arrange
+        JsonObject source = new JsonObject();
+        source.add("id", new JsonPrimitive("12345"));
+
+        // act
+        JsonElement result = parse.extractValue(source, "id");
+
+        // assert
+        assertThat(result.getAsString(), is("12345"));
     }
 
     @Test
