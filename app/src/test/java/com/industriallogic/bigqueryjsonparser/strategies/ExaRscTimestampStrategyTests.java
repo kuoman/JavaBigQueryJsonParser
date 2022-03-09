@@ -22,7 +22,7 @@ public class ExaRscTimestampStrategyTests {
         result = exaRscTimestampStrategy.parse(result, source);
 
         // assert
-        assertThat(result.get("exa_rsc.timestamp").getAsLong(), is(1644862504782000L));
+        assertThat(result.get("exa_rsc_timestamp").getAsLong(), is(1644862504782000L));
     }
 
     @Test
@@ -37,6 +37,6 @@ public class ExaRscTimestampStrategyTests {
 
         // assert
 
-        assertThat(result.has("exa_rsc.timestamp"), is(false));
+        assertThat(result.has("exa_rsc_timestamp"), is(false));
     }
 }
