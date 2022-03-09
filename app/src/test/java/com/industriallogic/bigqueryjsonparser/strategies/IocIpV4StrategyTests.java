@@ -9,39 +9,36 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class IdStrategyTests {
+public class IocIpV4StrategyTests {
+
+    private final IocIpV4Strategy iocIpV4Strategy = new IocIpV4Strategy(new MockParse());
 
     @Test
-    public void shouldExtractId(){
+    public void shouldGetSubArray() {
         // arrange
-        JsonObject input = new JsonObject();
-        input.add("id", new JsonPrimitive("12345"));
+        JsonObject source = new JsonObject();
+        source.add("ioc_ip_v4", new JsonPrimitive(""));
         JsonObject result = new JsonObject();
 
-        IdStrategy idStrategy = new IdStrategy(new MockParse());
-
         // act
-        result = idStrategy.parse(result, input);
+        result = iocIpV4Strategy.parse(result, source);
 
         // assert
-        assertThat(result.get("id").getAsString(), is("HI"));
+        assertThat(result.get("ioc_ip_v4").getAsString(), is("HI"));
     }
 
     @Test
-    public void shouldNotExtractIfIdDoesNotExist(){
+    public void shouldNotGetSubArrayIfKeyDoesNotExist() {
         // arrange
-        JsonObject input = new JsonObject();
-        input.add("idz", new JsonPrimitive("12345"));
+        JsonObject source = new JsonObject();
+        source.add("ioc_ip_v4x", new JsonPrimitive(""));
         JsonObject result = new JsonObject();
 
-        IdStrategy idStrategy = new IdStrategy(new MockParse());
-
         // act
-        result = idStrategy.parse(result, input);
+        result = iocIpV4Strategy.parse(result, source);
 
         // assert
-
-        assertThat(result.has("id"), is(false));
+        assertThat(result.has("ioc_ip_v4"), is(false));
     }
 
     private class MockParse implements Parse{
@@ -53,12 +50,12 @@ public class IdStrategyTests {
 
         @Override
         public JsonElement getValuesFromArray(JsonObject source, String key) {
-            return null;
+            return new JsonPrimitive("HI");
         }
 
         @Override
         public JsonElement extractValue(JsonObject source, String key) {
-            return new JsonPrimitive("HI");
+            return null;
         }
 
         @Override

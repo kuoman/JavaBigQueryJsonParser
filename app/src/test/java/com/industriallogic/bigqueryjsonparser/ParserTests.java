@@ -17,7 +17,7 @@ public class ParserTests {
     private final String json2File = "src/test/java/com/industriallogic/bigqueryjsonparser/json2.json";
     private final String json3File = "src/test/java/com/industriallogic/bigqueryjsonparser/json3.json";
 
-    private final Parse parse = new Parse();
+    private final ParseImpl parse = new ParseImpl();
 
     @Test
     public void shouldFlatten1Level() {

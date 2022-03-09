@@ -1,13 +1,13 @@
 package com.industriallogic.bigqueryjsonparser.strategies;
 
 import com.google.gson.JsonObject;
-import com.industriallogic.bigqueryjsonparser.Parse;
+import com.industriallogic.bigqueryjsonparser.ParseImpl;
 
 public class ExaRscTimestampStrategy {
     private final String keyname = "exa_rsc_timestamp";
-    private final Parse parse;
+    private final ParseImpl parse;
 
-    public ExaRscTimestampStrategy(Parse parse) {
+    public ExaRscTimestampStrategy(ParseImpl parse) {
         this.parse = parse;
     }
 

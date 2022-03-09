@@ -1,13 +1,13 @@
 package com.industriallogic.bigqueryjsonparser.strategies;
 
 import com.google.gson.JsonObject;
-import com.industriallogic.bigqueryjsonparser.Parse;
+import com.industriallogic.bigqueryjsonparser.ParseImpl;
 
 public class ApproxLogTimeStrategy {
     private final String keyname = "approxLogTime";
-    private final Parse parse;
+    private final ParseImpl parse;
 
-    public ApproxLogTimeStrategy(Parse parse) {
+    public ApproxLogTimeStrategy(ParseImpl parse) {
         this.parse = parse;
     }
 

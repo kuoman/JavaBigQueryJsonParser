@@ -2,14 +2,14 @@ package com.industriallogic.bigqueryjsonparser.strategies;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import com.industriallogic.bigqueryjsonparser.Parse;
+import com.industriallogic.bigqueryjsonparser.ParseImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ExaRscTimestampStrategyTests {
-    private final ExaRscTimestampStrategy exaRscTimestampStrategy = new ExaRscTimestampStrategy(new Parse());
+    private final ExaRscTimestampStrategy exaRscTimestampStrategy = new ExaRscTimestampStrategy(new ParseImpl());
 
     @Test
     public void shouldExtractId() {
