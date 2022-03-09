@@ -270,7 +270,6 @@ public class ParserTests {
         assertThat(result.getAsString(), is("12345"));
     }
 
-
     @Test
     public void shouldGetValueFromNanoSeconds(){
         // arrange
@@ -284,6 +283,34 @@ public class ParserTests {
         assertThat(result.getAsLong(), is(1644862504782000L));
     }
 
+    @Test
+    public void shouldGetValueFromMicroSeconds(){
+        // arrange
+        JsonObject source = new JsonObject();
+        source.add("approxLogTime", new JsonPrimitive("1644862497000"));
+
+        // act
+        JsonElement result = parse.getMicroSeconds(source, "approxLogTime");
+
+        // assert
+        assertThat(result.getAsLong(), is(1644862497000000L));
+    }
+
+    @Test
+    public void shouldGetValue(){
+        // arrange
+        JsonObject source = new JsonObject();
+        JsonObject childObject = new JsonObject();
+        childObject.addProperty("value","10.66.251.6" );
+
+        source.add("id", childObject);
+
+        // act
+        JsonElement result = parse.extractSubValue(source, "id");
+
+        // assert
+        assertThat(result.getAsString(), is("10.66.251.6"));
+    }
 
     @Test
     public void shouldParseLogWithoutSourceIp() throws IOException {

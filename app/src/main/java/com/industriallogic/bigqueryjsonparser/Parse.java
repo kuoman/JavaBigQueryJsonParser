@@ -66,7 +66,7 @@ public class Parse {
         return new JsonPrimitive(rawMicro);
     }
 
-    private JsonElement extractSubValue(JsonObject source, String keyName) {
+    public JsonElement extractSubValue(JsonObject source, String keyName) {
         return source.get(keyName).getAsJsonObject().get("value");
     }
 
