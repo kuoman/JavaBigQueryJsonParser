@@ -11,7 +11,7 @@ public class ApproxLogTimeStrategy {
         this.parse = parse;
     }
 
-    JsonObject parse(JsonObject result, JsonObject source) {
+    public JsonObject parse(JsonObject result, JsonObject source) {
         if (source.has(keyname)) {
             result.add(keyname, parse.getMicroseconds(source, keyname));
         }

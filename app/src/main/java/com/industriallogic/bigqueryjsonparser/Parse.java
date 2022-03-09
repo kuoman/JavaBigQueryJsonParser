@@ -1,6 +1,7 @@
 package com.industriallogic.bigqueryjsonparser;
 
 import com.google.gson.*;
+import com.industriallogic.bigqueryjsonparser.strategies.ApproxLogTimeStrategy;
 import com.industriallogic.bigqueryjsonparser.strategies.ExaRscTimestampStrategy;
 
 import java.time.Instant;
@@ -20,8 +21,7 @@ public class Parse {
 
         // required
         new ExaRscTimestampStrategy(this).parse(result, source);
-
-        result.add("approxLogTime", getMicroseconds(source, "approxLogTime"));
+        new ApproxLogTimeStrategy(this).parse(result, source);
 
         // unknown
         result.add("ioc_ip_v4", getValuesFromArray(source, "ioc_ip_v4"));
