@@ -17,14 +17,22 @@ public class Parse {
     private JsonObject parse(JsonObject source) {
         JsonObject result = new JsonObject();
 
+        // required
         result.add("exa_rsc_timestamp", getNanoSeconds(source, "exa_rsc_timestamp"));
 
         result.add("approxLogTime", getMicroseconds(source, "approxLogTime"));
 
+        // unknown
         result.add("ioc_ip_v4", getValuesFromArray(source, "ioc_ip_v4"));
 
-        result.add("src_ip", extractSubValue(source, "src_ip"));
-        result.add("dest_ip", extractSubValue(source, "dest_ip"));
+        // optional
+        if (source.has("src_ip")){
+            result.add("src_ip", extractSubValue(source, "src_ip"));
+        }
+
+        if (source.has("dest_ip")){
+            result.add("dest_ip", extractSubValue(source, "dest_ip"));
+        }
 
         return result;
     }

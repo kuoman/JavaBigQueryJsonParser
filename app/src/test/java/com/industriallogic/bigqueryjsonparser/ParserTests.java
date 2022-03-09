@@ -231,6 +231,20 @@ public class ParserTests {
         assertThat(result.get("ioc_ip_v4").getAsJsonArray().get(3).getAsString(), is("170.232.3.56"));
     }
 
+    @Test
+    public void shouldParseLogWithoutSourceIp() throws IOException {
+        // arrange
+        Path filename = Path.of(json3File);
+        String fileContent = Files.readString(filename);
+
+        // act
+        JsonObject result = parse.parse(fileContent);
+
+        // assert
+        assertThat(result.get("approxLogTime").getAsString(), is("1644862497000000"));
+       // assertThat(flattened.get("id").getAsString(), is("bd5c39ae-d89e-460b-a659-01e2e62eaba1"));
+    }
+
     private JsonObject createJsonObject(String json) {
         return JsonParser.parseString(json).getAsJsonObject();
     }
