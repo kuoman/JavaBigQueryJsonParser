@@ -9,7 +9,6 @@ public class IdStrategy {
     private Parse parse;
 
     public IdStrategy(Parse parse) {
-
         this.parse = parse;
     }
 

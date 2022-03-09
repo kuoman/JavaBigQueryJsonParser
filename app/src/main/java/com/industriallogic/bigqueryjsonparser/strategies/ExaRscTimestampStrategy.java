@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.industriallogic.bigqueryjsonparser.Parse;
 
 public class ExaRscTimestampStrategy {
-    public final String keyname = "exa_rsc.timestamp";
+    private final String keyname = "exa_rsc.timestamp";
     private final Parse parse;
 
     public ExaRscTimestampStrategy(Parse parse) {
