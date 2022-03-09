@@ -2,13 +2,14 @@ package com.industriallogic.bigqueryjsonparser.strategies;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import com.industriallogic.bigqueryjsonparser.Parse;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ApproxLogTimeStrategyTests {
+
+    private final ApproxLogTimeStrategy approxLogTimeStrategy = new ApproxLogTimeStrategy();
 
     @Test
     public void shouldExtractApproxLogTime() {
@@ -18,7 +19,7 @@ public class ApproxLogTimeStrategyTests {
         JsonObject result = new JsonObject();
 
         // act
-        result = parse(result, source);
+        result = approxLogTimeStrategy.parse(result, source);
 
         // assert
         assertThat(result.get("approxLogTime").getAsString(), is("1644862497000000"));
@@ -32,17 +33,9 @@ public class ApproxLogTimeStrategyTests {
         JsonObject result = new JsonObject();
 
         // act
-        result = parse(result, source);
+        result = approxLogTimeStrategy.parse(result, source);
 
         // assert
         assertThat(result.has("approxLogTime"), is(false));
-    }
-
-    private JsonObject parse(JsonObject result, JsonObject source) {
-        if (source.has("approxLogTime")) {
-            result.add("approxLogTime", new Parse().getMicroseconds(source, "approxLogTime"));
-        }
-
-        return result;
     }
 }
