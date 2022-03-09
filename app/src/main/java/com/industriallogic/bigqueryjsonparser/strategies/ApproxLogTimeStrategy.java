@@ -4,11 +4,10 @@ import com.google.gson.JsonObject;
 import com.industriallogic.bigqueryjsonparser.Parse;
 
 public class ApproxLogTimeStrategy {
+    private final Parse parse;
 
-    private Parse parse;
-
-    public ApproxLogTimeStrategy() {
-        parse = new Parse();
+    public ApproxLogTimeStrategy(Parse parse) {
+        this.parse = parse;
     }
 
     JsonObject parse(JsonObject result, JsonObject source) {
