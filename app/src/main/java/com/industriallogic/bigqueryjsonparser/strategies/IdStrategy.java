@@ -1,4 +1,4 @@
-package com.industriallogic.bigqueryjsonparser.parseStrategies;
+package com.industriallogic.bigqueryjsonparser.strategies;
 
 import com.google.gson.JsonObject;
 import com.industriallogic.bigqueryjsonparser.Parse;

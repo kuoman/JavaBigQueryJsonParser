@@ -3,10 +3,7 @@ package com.industriallogic.bigqueryjsonparser.strategies;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.industriallogic.bigqueryjsonparser.Parse;
-import com.industriallogic.bigqueryjsonparser.parseStrategies.IdStrategy;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,7 +27,7 @@ public class IdStrategyTests {
     }
 
     @Test
-    public void shouldNotExtractIfIdDoesNotExist() throws IOException {
+    public void shouldNotExtractIfIdDoesNotExist(){
         // arrange
         JsonObject input = new JsonObject();
         input.add("idz", new JsonPrimitive("12345"));
