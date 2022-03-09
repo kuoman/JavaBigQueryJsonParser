@@ -13,7 +13,7 @@ public class ApproxLogTimeStrategy {
 
     public JsonObject parse(JsonObject result, JsonObject source) {
         if (source.has(keyname)) {
-            result.add(keyname, parse.getMicroseconds(source, keyname));
+            result.add(keyname, parse.getMicroSeconds(source, keyname));
         }
 
         return result;

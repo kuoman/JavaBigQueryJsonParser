@@ -60,7 +60,7 @@ public class Parse {
         return new JsonPrimitive(rawMicro);
     }
 
-    public JsonElement getMicroseconds(JsonObject source, String keyName) {
+    public JsonElement getMicroSeconds(JsonObject source, String keyName) {
         long rawMilli = source.get(keyName).getAsLong();
         long rawMicro = TimeUnit.MILLISECONDS.toMicros(rawMilli);
         return new JsonPrimitive(rawMicro);

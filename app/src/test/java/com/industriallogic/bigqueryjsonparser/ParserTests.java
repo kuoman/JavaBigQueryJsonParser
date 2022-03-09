@@ -270,6 +270,21 @@ public class ParserTests {
         assertThat(result.getAsString(), is("12345"));
     }
 
+
+    @Test
+    public void shouldGetValueFromNanoSeconds(){
+        // arrange
+        JsonObject source = new JsonObject();
+        source.add("exa_rsc_timestamp", new JsonPrimitive("2022-02-14T18:15:04.782Z"));
+
+        // act
+        JsonElement result = parse.getNanoSeconds(source, "exa_rsc_timestamp");
+
+        // assert
+        assertThat(result.getAsLong(), is(1644862504782000L));
+    }
+
+
     @Test
     public void shouldParseLogWithoutSourceIp() throws IOException {
         // arrange
