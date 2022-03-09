@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class SrcIpStrategyTests {
+public class SubValueStrategyTests {
     @Test
     public void shouldAddSrcIp() {
         // arrange
@@ -19,10 +19,10 @@ public class SrcIpStrategyTests {
 
         JsonObject result = new JsonObject();
 
-        SrcIpStrategy srcIpStrategy = new SrcIpStrategy(new ParseImpl(), "src_ip");
+        SubValueStrategy subValueStrategy = new SubValueStrategy(new ParseImpl(), "src_ip");
 
         // act
-        result = srcIpStrategy.parse(result, source);
+        result = subValueStrategy.parse(result, source);
 
         // assert
         assertThat(result.get("src_ip").getAsString(), is("162.3.63.50"));
@@ -39,10 +39,10 @@ public class SrcIpStrategyTests {
 
         JsonObject result = new JsonObject();
 
-        SrcIpStrategy srcIpStrategy = new SrcIpStrategy(new ParseImpl(), "dest_ip");
+        SubValueStrategy subValueStrategy = new SubValueStrategy(new ParseImpl(), "dest_ip");
 
         // act
-        result = srcIpStrategy.parse(result, source);
+        result = subValueStrategy.parse(result, source);
 
         // assert
         assertThat(result.get("dest_ip").getAsString(), is("162.3.63.50"));
@@ -56,10 +56,10 @@ public class SrcIpStrategyTests {
 
         JsonObject result = new JsonObject();
 
-        SrcIpStrategy srcIpStrategy = new SrcIpStrategy(new ParseImpl(), "src_ip");
+        SubValueStrategy subValueStrategy = new SubValueStrategy(new ParseImpl(), "src_ip");
 
         // act
-        result = srcIpStrategy.parse(result, source);
+        result = subValueStrategy.parse(result, source);
 
         // assert
         assertThat(result.has("src_ip"), is(false));

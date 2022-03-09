@@ -3,11 +3,11 @@ package com.industriallogic.bigqueryjsonparser.strategies;
 import com.google.gson.JsonObject;
 import com.industriallogic.bigqueryjsonparser.Parse;
 
-public class SrcIpStrategy {
+public class SubValueStrategy {
     private final String keyName;
     private final Parse parse;
 
-    public SrcIpStrategy(Parse parse, String keyName) {
+    public SubValueStrategy(Parse parse, String keyName) {
         this.parse = parse;
         this.keyName = keyName;
     }
