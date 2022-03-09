@@ -38,7 +38,7 @@ public class Parse {
         return result;
     }
 
-    private JsonElement getValuesFromArray(JsonObject source, String key) {
+    public JsonElement getValuesFromArray(JsonObject source, String key) {
         JsonArray result = new JsonArray();
 
         source.get(key).getAsJsonArray().forEach(element -> result.add(element.getAsJsonObject().get("value")));

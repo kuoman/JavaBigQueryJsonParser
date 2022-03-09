@@ -1,6 +1,8 @@
 package com.industriallogic.bigqueryjsonparser;
 
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.junit.jupiter.api.Test;
@@ -229,6 +231,33 @@ public class ParserTests {
         assertThat(result.get("ioc_ip_v4").getAsJsonArray().get(1).getAsString(), is("10.66.251.6"));
         assertThat(result.get("ioc_ip_v4").getAsJsonArray().get(2).getAsString(), is("172.28.8.251"));
         assertThat(result.get("ioc_ip_v4").getAsJsonArray().get(3).getAsString(), is("170.232.3.56"));
+    }
+    
+    @Test
+    public void shouldGetValuesFromArray() {
+        // arrange.
+        JsonArray array = new JsonArray();
+
+        JsonObject object1 = new JsonObject();
+        object1.addProperty("value", "value1");
+
+        array.add(object1);
+
+        JsonObject object2 = new JsonObject();
+        object2.addProperty("value", "value2");
+
+        array.add(object2);
+
+        JsonObject source = new JsonObject();
+        source.add("id", array);
+
+        // act.
+        JsonElement result = parse.getValuesFromArray(source, "id");
+
+        // assert.
+        assertThat(result.getAsJsonArray().size(), is(2));
+        assertThat(result.getAsJsonArray().get(0).getAsString(), is("value1"));
+        assertThat(result.getAsJsonArray().get(1).getAsString(), is("value2"));
     }
 
     @Test
