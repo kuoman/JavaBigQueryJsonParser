@@ -2,6 +2,7 @@ package com.industriallogic.bigqueryjsonparser.strategies;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import com.industriallogic.bigqueryjsonparser.Parse;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -39,7 +40,7 @@ public class ApproxLogTimeStrategyTests {
 
     private JsonObject parse(JsonObject result, JsonObject source) {
         if (source.has("approxLogTime")) {
-            result.addProperty("approxLogTime", "1644862497000000");
+            result.add("approxLogTime", new Parse().getMicroseconds(source, "approxLogTime"));
         }
 
         return result;
