@@ -52,16 +52,16 @@ public class Parse {
     private JsonElement getNanoSeconds(JsonObject source, String key) {
         Instant exaRscTimestamp = Instant.parse(source.get(key).getAsString());
 
-        Long epoch = exaRscTimestamp.getEpochSecond();
-        Long micro = TimeUnit.NANOSECONDS.toMicros(exaRscTimestamp.getNano());
-        Long rawMicro = TimeUnit.SECONDS.toMicros(epoch) + micro;
+        long epoch = exaRscTimestamp.getEpochSecond();
+        long micro = TimeUnit.NANOSECONDS.toMicros(exaRscTimestamp.getNano());
+        long rawMicro = TimeUnit.SECONDS.toMicros(epoch) + micro;
 
         return new JsonPrimitive(rawMicro);
     }
 
     private JsonElement getMicroseconds(JsonObject source, String keyName) {
-        Long rawMilli = source.get(keyName).getAsLong();
-        Long rawMicro = TimeUnit.MILLISECONDS.toMicros(rawMilli);
+        long rawMilli = source.get(keyName).getAsLong();
+        long rawMicro = TimeUnit.MILLISECONDS.toMicros(rawMilli);
         return new JsonPrimitive(rawMicro);
     }
 
