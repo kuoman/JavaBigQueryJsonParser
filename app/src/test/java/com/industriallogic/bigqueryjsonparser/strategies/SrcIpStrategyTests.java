@@ -1,13 +1,14 @@
 package com.industriallogic.bigqueryjsonparser.strategies;
 
 import com.google.gson.JsonObject;
-import com.industriallogic.bigqueryjsonparser.ParseImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SrcIpStrategyTests {
+    private final SrcIpStrategy srcIpStrategy = new SrcIpStrategy();
+
     @Test
     public void shouldAddSrcIp() {
         // arrange
@@ -20,7 +21,7 @@ public class SrcIpStrategyTests {
         JsonObject result = new JsonObject();
 
         // act
-        result = parse(result, source);
+        result = srcIpStrategy.parse(result, source);
 
         // assert
         assertThat(result.get("src_ip").getAsString(), is("162.3.63.50"));
@@ -35,16 +36,9 @@ public class SrcIpStrategyTests {
         JsonObject result = new JsonObject();
 
         // act
-        result = parse(result, source);
+        result = srcIpStrategy.parse(result, source);
 
         // assert
         assertThat(result.has("src_ip"), is(false));
-    }
-
-    private JsonObject parse(JsonObject result, JsonObject source) {
-        if (source.has("src_ip")) {
-            result.add("src_ip", new ParseImpl().extractSubValue(source, "src_ip"));
-        }
-        return result;
     }
 }
