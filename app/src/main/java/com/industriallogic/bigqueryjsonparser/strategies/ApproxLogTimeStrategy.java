@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.industriallogic.bigqueryjsonparser.Parse;
 
 public class ApproxLogTimeStrategy {
+    private final String keyname = "approxLogTime";
     private final Parse parse;
 
     public ApproxLogTimeStrategy(Parse parse) {
@@ -11,8 +12,8 @@ public class ApproxLogTimeStrategy {
     }
 
     JsonObject parse(JsonObject result, JsonObject source) {
-        if (source.has("approxLogTime")) {
-            result.add("approxLogTime", parse.getMicroseconds(source, "approxLogTime"));
+        if (source.has(keyname)) {
+            result.add(keyname, parse.getMicroseconds(source, keyname));
         }
 
         return result;
