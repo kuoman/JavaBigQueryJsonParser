@@ -1,6 +1,7 @@
 package com.industriallogic.bigqueryjsonparser;
 
 import com.google.gson.*;
+import com.industriallogic.bigqueryjsonparser.strategies.ExaRscTimestampStrategy;
 
 import java.time.Instant;
 import java.util.concurrent.TimeUnit;
@@ -18,7 +19,7 @@ public class Parse {
         JsonObject result = new JsonObject();
 
         // required
-        result.add("exa_rsc_timestamp", getNanoSeconds(source, "exa_rsc_timestamp"));
+        new ExaRscTimestampStrategy(this).parse(result, source);
 
         result.add("approxLogTime", getMicroseconds(source, "approxLogTime"));
 

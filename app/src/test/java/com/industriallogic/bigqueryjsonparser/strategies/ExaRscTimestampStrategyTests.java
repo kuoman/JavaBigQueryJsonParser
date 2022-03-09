@@ -15,7 +15,7 @@ public class ExaRscTimestampStrategyTests {
     public void shouldExtractId() {
         // arrange
         JsonObject source = new JsonObject();
-        source.add("exa_rsc.timestamp", new JsonPrimitive("2022-02-14T18:15:04.782Z"));
+        source.add("exa_rsc_timestamp", new JsonPrimitive("2022-02-14T18:15:04.782Z"));
         JsonObject result = new JsonObject();
 
         // act
@@ -29,7 +29,7 @@ public class ExaRscTimestampStrategyTests {
     public void shouldNotExtractIfIdDoesNotExist(){
         // arrange
         JsonObject source = new JsonObject();
-        source.add("exa_rsc.timestampx", new JsonPrimitive("2022-02-14T18:15:04.782Z"));
+        source.add("exa_rsc_timestampx", new JsonPrimitive("2022-02-14T18:15:04.782Z"));
         JsonObject result = new JsonObject();
 
         // act
