@@ -45,7 +45,7 @@ public class Parse {
         return result;
     }
 
-    private JsonElement extractValue(JsonObject source, String key) {
+    public JsonElement extractValue(JsonObject source, String key) {
         return source.get(key);
     }
 

@@ -1,6 +1,7 @@
 package com.industriallogic.bigqueryjsonparser.parseStrategies;
 
 import com.google.gson.JsonObject;
+import com.industriallogic.bigqueryjsonparser.Parse;
 
 public class IdStrategy {
 
@@ -9,7 +10,9 @@ public class IdStrategy {
     public JsonObject parse(JsonObject result, JsonObject source) {
 
         if (source.has(fieldName)) {
-            result.add(fieldName, source.get(fieldName));
+            Parse parse = new Parse();
+
+            result.add(fieldName, parse.extractValue(source, fieldName));
         }
 
         return result;

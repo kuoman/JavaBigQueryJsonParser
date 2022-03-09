@@ -13,7 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class IdStrategyTests {
 
     @Test
-    public void shouldExtractId() throws IOException {
+    public void shouldExtractId(){
         // arrange
         JsonObject input = new JsonObject();
         input.add("id", new JsonPrimitive("12345"));
@@ -43,7 +43,5 @@ public class IdStrategyTests {
         // assert
 
         assertThat(result.has("id"), is(false));
-
     }
-
 }
