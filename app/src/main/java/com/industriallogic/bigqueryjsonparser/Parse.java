@@ -49,7 +49,7 @@ public class Parse {
         return source.get(key);
     }
 
-    private JsonElement getNanoSeconds(JsonObject source, String key) {
+    public JsonElement getNanoSeconds(JsonObject source, String key) {
         Instant exaRscTimestamp = Instant.parse(source.get(key).getAsString());
 
         long epoch = exaRscTimestamp.getEpochSecond();

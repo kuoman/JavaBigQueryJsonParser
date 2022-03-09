@@ -10,9 +10,7 @@ import java.io.IOException;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class IdExtractStrategyTests {
-
-    private final String json1File = "src/test/java/com/industriallogic/bigqueryjsonparser/json1.json";
+public class IdStrategyTests {
 
     @Test
     public void shouldExtractId() throws IOException {
