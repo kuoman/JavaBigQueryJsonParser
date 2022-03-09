@@ -4,12 +4,13 @@ import com.google.gson.JsonObject;
 import com.industriallogic.bigqueryjsonparser.Parse;
 
 public class ExaRscTimestampStrategy {
-    public ExaRscTimestampStrategy() {
+    private Parse parse;
+
+    public ExaRscTimestampStrategy(Parse parse) {
+        this.parse = parse;
     }
 
     public JsonObject parse(JsonObject result, JsonObject source) {
-        Parse parse = new Parse();
-
         if (source.has("exa_rsc.timestamp")) {
             result.add("exa_rsc.timestamp", parse.getNanoSeconds(source, "exa_rsc.timestamp"));
         }
